@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+/* GLOBAL FUNCTION DECLARATION */
 int string_length (const char *string);
 void string_copy (char *string_destination , const char *string_source);
 void string_copy_end (char *string_destination , const char *string_source);
@@ -10,7 +10,7 @@ void string_copy_end (char *string_destination , const char *string_source);
 
 class String {
 
-public: // make this private
+private: // This is private
 
     /* String pointer holding the array address */
     char *string_pointer;
@@ -28,11 +28,11 @@ public:
 
     String (const char *temp_string1 ,const char *temp_string2 );
 
-    /*MEMBER FUNCTION */
+    /* MEMBER FUNCTION */
     int length ( ) const;
 
 
-    /* operator overloading */
+    /* OPERATOR OVERLOADING DECLARATION */
     String operator + ( String &temp_obj );
 
     String operator = ( const String& temp_obj);
@@ -46,10 +46,16 @@ public:
     friend ostream & operator << (ostream & , const String&);
     friend istream & operator >> (istream & , String&);
 
-    friend String & strcpy( String & , String &);
+    friend String & strcpy( String & string_destination , String & string_source );
+    friend String & strncpy( String & string_destination , String & string_source , int number_of_char);
+    friend int strcmp( String string1, String string2 );
+    friend int strncmp( String string1, String string2, int number_of_char);
+    friend String & strrev (String & string1);
+    friend String & strupper (String & string1);
+    friend String & strlower (String & string1);
 
 
-    /* Destructor */
+    /* DESTRUCTOR */
     virtual ~String();
 
 };
@@ -73,7 +79,7 @@ int main(){
 
 }
 
-/* Global Functions */
+/* GLOBAL FUNCTION */
 
 int string_length (const char *string) {
     int i;
@@ -130,14 +136,14 @@ String::~String() {
     delete string_pointer;
 }
 
-/* String class member function */
+/* STRING CLASS MEMBER FUNCTION DEFINITION */
 
 int String::length ( ) const {
     return (string_length((char *)string_pointer));
 }
 
 
-/* Operator Overloading */
+/* OPERATOR OVERLOADING */
 
 String String::operator+(String &temp_obj) {
     String s1(string_pointer,temp_obj.string_pointer);
@@ -172,6 +178,8 @@ istream & operator >> (istream & in, String& temp_obj){
     temp_obj(temp_string_obj);
     return in;
 }
+
+/* FRIEND FUNCTION DEFINITION */
 
 String & strcpy(String &string_destination, String &string_source) {
     delete string_destination.string_pointer;
@@ -236,11 +244,3 @@ String &strlower(String &string1) {
     }
     return string1;
 }
-
-
-
-
-
-
-
-
