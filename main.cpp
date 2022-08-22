@@ -56,7 +56,7 @@ public:
 
 
     /* DESTRUCTOR */
-    virtual ~String();
+    ~String();
 
 };
 /* FRIEND FUNCTION DECLARATION */
